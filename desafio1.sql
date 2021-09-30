@@ -1,10 +1,13 @@
-CREATE DATABASE IF NOT EXISTS SpotifyClone;
+DROP DATABASE IF EXISTS SpotifyClone;
+CREATE DATABASE SpotifyClone;
+USE SpotifyClone;
+
 
 CREATE TABLE SpotifyClone.planos (
     plano_id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(20) NOT NULL,
     valor DECIMAL(3 , 2 )
-)  ENGINE=INNODB;
+);
 
 CREATE TABLE SpotifyClone.usuarios (
     usuario_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -13,12 +16,12 @@ CREATE TABLE SpotifyClone.usuarios (
     plano_id INT NOT NULL,
     FOREIGN KEY (plano_id)
         REFERENCES SpotifyClone.planos (plano_id)
-)  ENGINE=INNODB;
+);
 
 CREATE TABLE SpotifyClone.artistas (
     artista_id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL
-)  ENGINE=INNODB;
+);
 
 CREATE TABLE SpotifyClone.albuns (
     album_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -26,7 +29,7 @@ CREATE TABLE SpotifyClone.albuns (
     artista_id INT NOT NULL,
     FOREIGN KEY (artista_id)
         REFERENCES SpotifyClone.artistas (artista_id)
-)  ENGINE=INNODB;
+);
 
 CREATE TABLE SpotifyClone.cancoes (
     cancao_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -34,7 +37,7 @@ CREATE TABLE SpotifyClone.cancoes (
     album_id INT NOT NULL,
     FOREIGN KEY (album_id)
         REFERENCES SpotifyClone.albuns (album_id)
-)  ENGINE=INNODB;
+);
 
 CREATE TABLE SpotifyClone.usuario_cancoes (
     usuario_id INT NOT NULL,
@@ -44,7 +47,7 @@ CREATE TABLE SpotifyClone.usuario_cancoes (
     FOREIGN KEY (cancao_id)
         REFERENCES SpotifyClone.cancoes (cancao_id),
     CONSTRAINT PRIMARY KEY (usuario_id , cancao_id)
-)  ENGINE=INNODB;
+);
 
 CREATE TABLE SpotifyClone.usuario_artistas (
     usuario_id INT NOT NULL,
@@ -54,7 +57,7 @@ CREATE TABLE SpotifyClone.usuario_artistas (
     FOREIGN KEY (artista_id)
         REFERENCES SpotifyClone.artistas (artista_id),
     CONSTRAINT PRIMARY KEY (usuario_id , artista_id)
-)  ENGINE=INNODB;
+);
 
 INSERT INTO SpotifyClone.planos(nome, valor )
 VALUES
